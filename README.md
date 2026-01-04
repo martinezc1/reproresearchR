@@ -1,0 +1,50 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+~~~{r, include = FALSE} knitr::opts_chunk\$set( collapse = TRUE, comment
+= “\#\>”, fig.path = “man/figures/README-”, out.width = “100%” )~~~
+
+# reproresearchR
+
+<!-- badges: start -->
+
+<!-- badges: end -->
+
+The goal of `reproresearchR` is to support **reproducible research
+workflows in R**, particularly in teaching and applied research
+settings.
+
+The package provides datasets, helper functions, and examples designed
+to encourage transparent, well-documented, and fully reproducible
+analyses.
+
+## Installation
+
+You can install the development version of `reproresearchR` from GitHub:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("YOUR_GITHUB_USERNAME/reproresearchR")
+```
+
+## Basic usage
+
+~~~{r} library(reproresearchR)~~~
+
+## Available objects
+
+~~~{r} ls(“package:reproresearchR”)~~~
+
+## Example
+
+~~~{r} \# data(package = “reproresearchR”)~~~
+
+## README workflow
+
+This README is written in `README.Rmd`.
+
+Render it to `README.md` using:
+
+``` r
+devtools::build_readme()
+```
