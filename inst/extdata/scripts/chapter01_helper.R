@@ -37,7 +37,7 @@ x <- 5 # Making x equal to 5
 x <- sqrt(25)
 
 # Updating x
-x <- x + 1 
+x <- x + 1
 x # It is now equal to 6 and not 5
 
 # Objects are case sensitive
@@ -54,12 +54,12 @@ class(x) # x is numeric, as we already knew!
 
 
 ## wont_work <- a, b, c # no parenthesis
-## 
+##
 ## also_wont_work <- (a, b, c) # no c before the parenthesis
 
 ## ----numeric-vectors-----------------------------------------------------------
 # Numeric vector
-___ <- c(1, 2, 3, 4, 5) # c stands for combine/concatenate 
+___ <- c(1, 2, 3, 4, 5) # c stands for combine/concatenate
 
 number_vector
 
@@ -111,7 +111,7 @@ class(some_lies)
 # Once you put quotation marks, it makes them a character
 truth_logic <- c("TRUE","FALSE","TRUE")
 
-class(truth_logic) 
+class(truth_logic)
 
 
 ## ----factors-------------------------------------------------------------------
@@ -191,14 +191,8 @@ roster
 # read.csv example (commented because path varies by machine)
 # my_df <- read.csv("/path/to/your/file.csv")
 
-# Working directory helpers
-# getwd()
-# setwd("/path/where/you/want") # <- avoid hard-coding in projects; we’ll cover R Projects later
-#setwd("~/Documents/Work/Brooklyn College/Fall 2025")
-
 
 ## ----packages-intro------------------------------------------------------------
-# install.packages("tidyverse")
 # library(readxl)
 # library(tidyverse)
 

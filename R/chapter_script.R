@@ -2,26 +2,24 @@
 #'
 #' @param chapter Chapter number (e.g., 1, 2, 3).
 #' @param type Script type: "full" or "helper".
-#' @param dest Directory to copy the script into. Defaults to working directory.
+#' @param dest Directory to copy the script into.
 #' @param run If TRUE, source() the script after copying.
 #' @param overwrite If TRUE, overwrite an existing file.
 #' @param open If TRUE, attempt to open the copied script in RStudio.
 #'
 #' @return Path to the copied script (invisibly if run = TRUE).
 #' @examples
-#' # Copy the Chapter 3 helper script into the working directory
-#' \dontrun{
-#' chapter_script(3, "helper")
-#' }
+#' tmp <- tempdir()
+#' chapter_script(3, "helper", dest = tmp, overwrite = TRUE)
 #'
-#' # Copy and open the Chapter 3 helper script in RStudio
-#' \dontrun{
-#' chapter_script(3, "helper", open = TRUE)
+#' \donttest{
+#' tmp <- tempdir()
+#' chapter_script(3, "helper", dest = tmp, open = TRUE, overwrite = TRUE)
 #' }
 #' @export
 chapter_script <- function(chapter,
                            type = c("full", "helper"),
-                           dest = getwd(),
+                           dest,
                            run = FALSE,
                            overwrite = FALSE,
                            open = FALSE) {
@@ -30,6 +28,10 @@ chapter_script <- function(chapter,
 
   if (!is.numeric(chapter) || length(chapter) != 1 || is.na(chapter)) {
     stop("`chapter` must be a single number (e.g., 1, 2, 3).", call. = FALSE)
+  }
+
+  if (missing(dest) || !is.character(dest) || length(dest) != 1 || is.na(dest)) {
+    stop("`dest` must be a valid directory path.", call. = FALSE)
   }
 
   chapter <- sprintf("%02d", as.integer(chapter))
@@ -45,7 +47,10 @@ chapter_script <- function(chapter,
     )
   }
 
-  if (!dir.exists(dest)) dir.create(dest, recursive = TRUE)
+  if (!dir.exists(dest)) {
+    dir.create(dest, recursive = TRUE)
+  }
+
   out_path <- file.path(dest, fname)
 
   if (file.exists(out_path) && !overwrite) {
@@ -57,7 +62,9 @@ chapter_script <- function(chapter,
   }
 
   ok <- file.copy(pkg_path, out_path, overwrite = overwrite)
-  if (!ok) stop("Failed to copy script.", call. = FALSE)
+  if (!ok) {
+    stop("Failed to copy script.", call. = FALSE)
+  }
 
   if (open) {
     if (requireNamespace("rstudioapi", quietly = TRUE) &&

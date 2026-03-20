@@ -1,15 +1,15 @@
 Package: reproresearchR
 Type: Package
 Title: Companion Package for 'Reproducible Research Using R'
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person("Christian", "Martinez", 
            email = "c.martinez0@outlook.com", 
            role = c("aut", "cre"))
 Description: Provides teaching datasets and helper functions to support the open
-    educational resource textbook 'Reproducible Research Using R'. Includes
-    datasets used throughout the book and utilities to list and copy chapter
-    scripts shipped with the package.
+    educational resource Martinez (2026) "Reproducible Research Using R"
+    <doi:10.5281/zenodo.19136755>. The package includes datasets used throughout
+    the book and utilities to list and copy chapter scripts shipped with the package.
 License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 7.3.3
@@ -17,5 +17,5 @@ LazyData: true
 Depends: R (>= 3.5.0)
 Suggests: 
     rstudioapi
-URL: https://019b8644-d06c-177a-4f52-b595bd0f7ddc.share.connect.posit.cloud/, https://github.com/martinezc1/reproresearchR, https://martinezc1.github.io/reproresearchR/
+URL: https://martinezc1-reproducible-research-using-r.share.connect.posit.cloud/, https://github.com/martinezc1/reproresearchR
 BugReports: https://github.com/martinezc1/reproresearchR/issues

@@ -1,50 +1,77 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-~~~{r, include = FALSE} knitr::opts_chunk\$set( collapse = TRUE, comment
-= “\#\>”, fig.path = “man/figures/README-”, out.width = “100%” )~~~
-
 # reproresearchR
 
-<!-- badges: start -->
+`reproresearchR` is the companion R package for the open educational
+resource Reproducible Research Using R by Christian Martinez.
 
-<!-- badges: end -->
+The package is designed to support reproducible research workflows in R
+by providing:
 
-The goal of `reproresearchR` is to support **reproducible research
-workflows in R**, particularly in teaching and applied research
-settings.
+- teaching datasets used throughout the textbook
+- helper functions for accessing chapter scripts
+- reproducible examples aligned with the book’s lessons
+- a bridge between learning R and applying reproducible workflows in
+  real projects
 
-The package provides datasets, helper functions, and examples designed
-to encourage transparent, well-documented, and fully reproducible
-analyses.
+This package is especially useful for students, instructors, and
+self-learners who want a structured way to practice transparent,
+organized, and repeatable analysis.
+
+## Companion Textbook
+
+This package accompanies:
+
+Martinez (2026), *Reproducible Research Using R*
+
+<https://martinezc1-reproducible-research-using-r.share.connect.posit.cloud/>
+
+<https://doi.org/10.5281/zenodo.19136755>
 
 ## Installation
 
-You can install the development version of `reproresearchR` from GitHub:
+Install the development version from GitHub:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("YOUR_GITHUB_USERNAME/reproresearchR")
+# install.packages("remotes")
+remotes::install_github("martinezc1/reproresearchR")
 ```
 
-## Basic usage
+## What is included?
 
-~~~{r} library(reproresearchR)~~~
+The package includes:
 
-## Available objects
+- datasets for teaching and practice
+- chapter scripts bundled with the package
+- functions to list available chapter scripts
+- functions to copy chapter scripts into your own working directory
 
-~~~{r} ls(“package:reproresearchR”)~~~
+## Included datasets
+
+The package includes teaching datasets used in the textbook, such as: -
+exam_data - infection_treatments - pizza_prices
 
 ## Example
 
-~~~{r} \# data(package = “reproresearchR”)~~~
-
-## README workflow
-
-This README is written in `README.Rmd`.
-
-Render it to `README.md` using:
-
 ``` r
-devtools::build_readme()
+library(reproresearchR)
+
+list_chapters()
+
+tmp <- tempdir()
+chapter_script(2, "helper", dest = tmp, overwrite = TRUE)
 ```
+
+## Why this package?
+
+`reproresearchR` was built to make reproducible research more
+approachable and more practical. Rather than learning workflows in the
+abstract, users work directly with datasets, scripts, and examples tied
+to a full textbook and teaching framework.
+
+The goal is to help learners build habits that support:
+
+- organized project structure
+- transparent analysis
+- reproducible code
+- clear documentation
+- shareable research outputs

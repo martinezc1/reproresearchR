@@ -2,12 +2,6 @@
 # Reproducible Research Using R
 # (Helper Script)
 
-## ----installing-packages----------------------------------------------------------
-install.packages("tidyverse")
-install.packages("palmerpenguins")
-install.packages("fortunes")
-install.packages("cowsay")
-
 ## ----loading-packages----------------------------------------------------------
 library(tidyverse)
 library(___)
@@ -24,8 +18,6 @@ fortunes::fortune()   # random quote about R
 
 cowsay::say("Welcome to tidyverse!", by = "cow")
 
-
-## install.packages("nycOpenData")
 
 ## ----nycOpenData---------------------------------------------------------------
 library(nycOpenData)
@@ -73,7 +65,7 @@ penguins %>% select(___, island, bill_length_mm, ___)
 
 ## ----select-index--------------------------------------------------------------
 # This is saying let's take the first column, and then every column from 3 to 5
-penguins %>% select(1,3:5) 
+penguins %>% select(1,3:5)
 
 
 ## ----filter--------------------------------------------------------------------
@@ -133,16 +125,16 @@ penguins %>%
 
 
 ## ----rename--------------------------------------------------------------------
-penguins %>% rename(penguin_types = species) 
+penguins %>% rename(penguin_types = species)
 
 
 ## ----all-together--------------------------------------------------------------
-penguins_new <- penguins %>% 
+penguins_new <- penguins %>%
   select(species, island, bill_length_mm, ___) %>%
   filter(___ == "Adelie") %>%
   mutate(size_category = if_else(___ >= 3500, "Big","Small")) %>%
-  arrange(desc(body_mass_g)) %>% 
-  rename(penguin_types = species) 
+  arrange(desc(body_mass_g)) %>%
+  rename(penguin_types = species)
 
 
 ## ----tables--------------------------------------------------------------------
@@ -160,7 +152,7 @@ penguins %>%
 
 
 ## filter(species = "Adelie")  # WRONG
-## 
+##
 ## filter(species == "Adelie") # RIGHT
 
 ## ----na-math-------------------------------------------------------------------
@@ -171,13 +163,13 @@ mean(___$body_mass_g, na.rm = TRUE)   # CORRECT
 
 ## penguins %>%
 ##   select(species)     # Good
-## 
+##
 ## penguins
 ## %>% select(species)   # Bad
 
 ## penguins_select <- penguins %>%
 ##   select(species, island, bill_length_mm, body_mass_g)
-## 
+##
 ## penguins_new <- penguins_select %>%
 ##   filter(species == "Adelie")
 

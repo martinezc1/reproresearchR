@@ -7,7 +7,7 @@
 chapter_script(
   chapter,
   type = c("full", "helper"),
-  dest = getwd(),
+  dest,
   run = FALSE,
   overwrite = FALSE,
   open = FALSE
@@ -18,7 +18,7 @@ chapter_script(
 
 \item{type}{Script type: "full" or "helper".}
 
-\item{dest}{Directory to copy the script into. Defaults to working directory.}
+\item{dest}{Directory to copy the script into.}
 
 \item{run}{If TRUE, source() the script after copying.}
 
@@ -33,13 +33,11 @@ Path to the copied script (invisibly if run = TRUE).
 Copy or run a textbook chapter script
 }
 \examples{
-# Copy the Chapter 3 helper script into the working directory
-\dontrun{
-chapter_script(3, "helper")
-}
+tmp <- tempdir()
+chapter_script(3, "helper", dest = tmp, overwrite = TRUE)
 
-# Copy and open the Chapter 3 helper script in RStudio
-\dontrun{
-chapter_script(3, "helper", open = TRUE)
+\donttest{
+tmp <- tempdir()
+chapter_script(3, "helper", dest = tmp, open = TRUE, overwrite = TRUE)
 }
 }
