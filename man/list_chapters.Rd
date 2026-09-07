@@ -2,16 +2,19 @@
 % Please edit documentation in R/list_chapters.R
 \name{list_chapters}
 \alias{list_chapters}
-\title{List available chapter scripts included with the package}
+\title{List Available Chapters}
 \usage{
 list_chapters()
 }
 \value{
-A data frame with columns: chapter, type, file.
+A data frame describing the available chapter materials.
 }
 \description{
-List available chapter scripts included with the package
+Lists textbook chapters and the learning materials available
+for each chapter, including the Quarto chapter file, helper
+script, and completed script.
 }
 \examples{
 list_chapters()
+
 }

@@ -1,5 +1,11 @@
 #' Copy or run a textbook chapter script
 #'
+#' @description
+#' `chapter_script()` is deprecated. Use [chapter_materials()] instead
+#' to copy the complete set of materials associated with a textbook chapter.
+#'
+#' This function is retained for backward compatibility with existing code.
+#'
 #' @param chapter Chapter number (e.g., 1, 2, 3).
 #' @param type Script type: "full" or "helper".
 #' @param dest Directory to copy the script into.
@@ -8,14 +14,13 @@
 #' @param open If TRUE, attempt to open the copied script in RStudio.
 #'
 #' @return Path to the copied script (invisibly if run = TRUE).
+#'
 #' @examples
+#' \dontrun{
 #' tmp <- tempdir()
 #' chapter_script(3, "helper", dest = tmp, overwrite = TRUE)
-#'
-#' \donttest{
-#' tmp <- tempdir()
-#' chapter_script(3, "helper", dest = tmp, open = TRUE, overwrite = TRUE)
 #' }
+#'
 #' @export
 chapter_script <- function(chapter,
                            type = c("full", "helper"),
@@ -24,20 +29,41 @@ chapter_script <- function(chapter,
                            overwrite = FALSE,
                            open = FALSE) {
 
+  warning(
+    "`chapter_script()` is deprecated and will be removed in a future ",
+    "version of reproresearchR. Use `chapter_materials()` instead to copy ",
+    "the chapter Quarto file, helper script, and completed script together.",
+    call. = FALSE
+  )
+
   type <- match.arg(type)
 
   if (!is.numeric(chapter) || length(chapter) != 1 || is.na(chapter)) {
-    stop("`chapter` must be a single number (e.g., 1, 2, 3).", call. = FALSE)
+    stop(
+      "`chapter` must be a single number (e.g., 1, 2, 3).",
+      call. = FALSE
+    )
   }
 
-  if (missing(dest) || !is.character(dest) || length(dest) != 1 || is.na(dest)) {
-    stop("`dest` must be a valid directory path.", call. = FALSE)
+  if (missing(dest) ||
+      !is.character(dest) ||
+      length(dest) != 1 ||
+      is.na(dest)) {
+    stop(
+      "`dest` must be a valid directory path.",
+      call. = FALSE
+    )
   }
 
   chapter <- sprintf("%02d", as.integer(chapter))
   fname <- paste0("chapter", chapter, "_", type, ".R")
 
-  pkg_path <- system.file("extdata", "scripts", fname, package = "reproresearchR")
+  pkg_path <- system.file(
+    "extdata",
+    "scripts",
+    fname,
+    package = "reproresearchR"
+  )
 
   if (pkg_path == "") {
     stop(
@@ -61,16 +87,27 @@ chapter_script <- function(chapter,
     )
   }
 
-  ok <- file.copy(pkg_path, out_path, overwrite = overwrite)
+  ok <- file.copy(
+    pkg_path,
+    out_path,
+    overwrite = overwrite
+  )
+
   if (!ok) {
-    stop("Failed to copy script.", call. = FALSE)
+    stop(
+      "Failed to copy script.",
+      call. = FALSE
+    )
   }
 
   if (open) {
     if (requireNamespace("rstudioapi", quietly = TRUE) &&
         rstudioapi::isAvailable()) {
+
       rstudioapi::navigateToFile(out_path)
+
     } else {
+
       message(
         "`open = TRUE` requested, but RStudio is not available.\n",
         "File copied to: ", out_path
@@ -79,7 +116,11 @@ chapter_script <- function(chapter,
   }
 
   if (run) {
-    source(out_path, local = new.env(parent = globalenv()))
+    source(
+      out_path,
+      local = new.env(parent = globalenv())
+    )
+
     return(invisible(out_path))
   }
 

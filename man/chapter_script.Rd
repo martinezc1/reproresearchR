@@ -30,14 +30,15 @@ chapter_script(
 Path to the copied script (invisibly if run = TRUE).
 }
 \description{
-Copy or run a textbook chapter script
+`chapter_script()` is deprecated. Use [chapter_materials()] instead
+to copy the complete set of materials associated with a textbook chapter.
+
+This function is retained for backward compatibility with existing code.
 }
 \examples{
+\dontrun{
 tmp <- tempdir()
 chapter_script(3, "helper", dest = tmp, overwrite = TRUE)
-
-\donttest{
-tmp <- tempdir()
-chapter_script(3, "helper", dest = tmp, open = TRUE, overwrite = TRUE)
 }
+
 }

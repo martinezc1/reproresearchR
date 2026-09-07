@@ -1,37 +1,75 @@
-#' List available chapter scripts included with the package
+#' List Available Chapters
 #'
-#' @return A data frame with columns: chapter, type, file.
+#' Lists textbook chapters and the learning materials available
+#' for each chapter, including the Quarto chapter file, helper
+#' script, and completed script.
+#'
+#' @return A data frame describing the available chapter materials.
+#'
 #' @examples
 #' list_chapters()
+#'
 #' @export
 list_chapters <- function() {
 
-  scripts_dir <- system.file("extdata", "scripts", package = "reproresearchR")
-  if (scripts_dir == "") {
-    stop("Could not locate package scripts directory.", call. = FALSE)
-  }
-
-  files <- list.files(
-    scripts_dir,
-    pattern = "^chapter\\d{2}_(full|helper)\\.R$",
-    full.names = FALSE
+  chapters_dir <- system.file(
+    "chapters",
+    package = "reproresearchR"
   )
 
-  if (length(files) == 0) {
-    return(data.frame(chapter = integer(), type = character(), file = character()))
-  }
+  scripts_dir <- system.file(
+    "extdata",
+    "scripts",
+    package = "reproresearchR"
+  )
 
-  chapter_num <- as.integer(sub("^chapter(\\d{2})_.*$", "\\1", files))
-  type <- sub("^chapter\\d{2}_(full|helper)\\.R$", "\\1", files)
+  qmd_files <- list.files(
+    chapters_dir,
+    pattern = "^\\d{2}-.*\\.qmd$"
+  )
 
-  out <- data.frame(
-    chapter = chapter_num,
-    type = type,
-    file = files,
+  chapter_nums <- as.integer(
+    sub("^([0-9]{2}).*$", "\\1", qmd_files)
+  )
+
+  titles <- sub(
+    "^\\d{2}-",
+    "",
+    qmd_files
+  )
+
+  titles <- sub(
+    "\\.qmd$",
+    "",
+    titles
+  )
+
+  titles <- gsub(
+    "-",
+    " ",
+    titles
+  )
+
+  helper_exists <- file.exists(
+    file.path(
+      scripts_dir,
+      sprintf("chapter%02d_helper.R", chapter_nums)
+    )
+  )
+
+  full_exists <- file.exists(
+    file.path(
+      scripts_dir,
+      sprintf("chapter%02d_full.R", chapter_nums)
+    )
+  )
+
+  data.frame(
+    chapter = chapter_nums,
+    title = titles,
+    qmd = TRUE,
+    helper = helper_exists,
+    full = full_exists,
     stringsAsFactors = FALSE
   )
-
-  out <- out[order(out$chapter, out$type), , drop = FALSE]
-  rownames(out) <- NULL
-  out
 }
